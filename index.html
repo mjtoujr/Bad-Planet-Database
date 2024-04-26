@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planetary Log</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="container">
+    <h1>The Wall of Bad Planets</h1>
+    <p>Here's our non-official list of planets that are to be avoided; until the Company issues official 'no-go' orders, we should be looking out for each other. If you've survived an expedition to a place that should be left well alone, go ahead and use the form to add it to the list.</p>
+    <h2>Bad Planet Form</h2>
+    <div id="new-planet">
+        <form id='new-planet-form'>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required placeholder="Name of Planet">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="3" required placeholder="A brief summary of the planet"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="casualties">Total casualties suffered on the expedition:</label>
+                <input type="number" class="form-control" id="resources">
+            </div>
+            <div class="form-group">
+                <label for="danger">Planetary Dangers</label>
+                <input type="text" class="form-control" id="danger" required placeholder="Why should scouts avoid this planet?">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Info</button>
+        </form>
+    </div>
+    <h2>The List of Infamy</h2>
+    <div id="storage">
+
+    </div>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

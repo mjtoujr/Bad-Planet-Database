@@ -109,14 +109,14 @@ class DOMManager {
             $('#storage').append(
                 `<div id="${planet._id}" class="card">
                     <div class="card_header">
-                        <h2>${planet.name}</h2>
+                        <h3>${planet.name}</h3>
                     </div>
                     <div class="card-body">
                         <div class="card">
                         <!-- First, the planetary information -->
-                                <p><strong>Planet Description: </strong> ${planet.description}</p>
-                                <p><strong>Total Scout Casualties: </strong> ${planet.casualties}</p>
-                                <p><strong>The Dangers: </strong> ${planet.danger}</p>
+                                <span class="border border-success"><p><strong>Planet Description: </strong> ${planet.description}</p></span>
+                                <span class="border border-warning"><p><strong>Total Scout Casualties: </strong> ${planet.casualties}</p></span>
+                                <span class="border border-success"><p><strong>The Dangers: </strong> ${planet.danger}</p></span>
                         </div>
                         <!-- Then, Edit fields that are hidden until the edit button is clicked -->
                         <div id="${planet._id}-edit-fields" style="display: none;">
@@ -127,7 +127,7 @@ class DOMManager {
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class='edit' onclick='DOMManager.editPlanet("${planet._id}")'>Edit Planetary Record</button>
+                        <button class='btn btn-warning' onclick='DOMManager.editPlanet("${planet._id}")'>Edit Planetary Record</button>
                         <button class='btn btn-danger' onclick='DOMManager.deletePlanet("${planet._id}")'>Remove Planetary Record</button>
                     </div>
                 </div>

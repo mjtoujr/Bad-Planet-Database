@@ -1,0 +1,12 @@
+html {
+    background-color: skyblue;
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+h2 {
+    padding-bottom: 20px;
+}

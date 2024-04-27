@@ -1,5 +1,3 @@
-//Setting the page up to make sure information has fully loaded before proceeding
-//$(document).ready(function () {
 //First, defining the Planet object, with four traits, taken from the form
 class Planet {
     constructor(name, description, casualties, danger) {
@@ -28,11 +26,11 @@ class PlanetLogs {
         return $.get(this.url + `/${id}`);
     }
 
-    static addPlanet(planet) {
+    static addPlanet(planet) { //adding a new entry
         return $.post(this.url, planet);
     }
 
-    static updatePlanet(id, planet) {
+    static updatePlanet(id, planet) { //changing a previously-established entry
         return $.ajax({
             url: this.url + `/${id}`,
             dataType: 'json',
@@ -42,7 +40,7 @@ class PlanetLogs {
         });
     }
 
-    static deletePlanet(id) {
+    static deletePlanet(id) { //removing an entry
         return $.ajax({
             url: this.url + `/${id}`,
             type: 'DELETE',
@@ -52,13 +50,13 @@ class PlanetLogs {
 
 //Setting up the DOM management
 class DOMManager {
-    static planets;
+    static planets; //creating a planets object to work with
 
-    static getAllPlanets() {
+    static getAllPlanets() { //The PlanetLogs function for pulling all planets, ending with the render function to reload page
         PlanetLogs.getAllPlanets().then(planets => this.render(planets));
     }
     
-    static deletePlanet(id) {
+    static deletePlanet(id) { //The PlanetLogs function for deleting an entry, ending with the render function to reload page
         PlanetLogs.deletePlanet(id)
             .then(() => {
                 return PlanetLogs.getAllPlanets()
@@ -66,7 +64,7 @@ class DOMManager {
             .then((planets) => this.render(planets));
     }
 
-    static addPlanet(planet) {
+    static addPlanet(planet) { //The PlanetLogs function for adding an entry, ending with the render function to reload page
         PlanetLogs.addPlanet(planet)
         .then(() => {
             return PlanetLogs.getAllPlanets();
@@ -93,7 +91,7 @@ class DOMManager {
 
         //Creating a new Planet using the updated values, without passing new name
         let updatedPlanet = new Planet(name, description, casualties, danger);
-        //Call the updatePlanet function using the new object
+        //Call the updatePlanet function using the new object, ending with the render function to reload page
         PlanetLogs.updatePlanet(id, updatedPlanet)
             .then(() => {
                 return PlanetLogs.getAllPlanets();
@@ -105,7 +103,7 @@ class DOMManager {
     static render(planets) {
         this.planets = planets;
         $('#storage').empty(); //Emptying screen first
-        for (let planet of planets) {
+        for (let planet of planets) { //looping through each stored entry, and creating html code for them to be displayed
             $('#storage').append(
                 `<div id="${planet._id}" class="card">
                     <div class="card_header">
@@ -138,7 +136,7 @@ class DOMManager {
 
 }
 
-$('#new-planet-form').submit(function(event) {
+$('#new-planet-form').submit(function(event) { //linking the submit button for adding a new planet
     //Expecting custom results
     event.preventDefault();
     //Pull data from the form
@@ -158,6 +156,5 @@ $('#new-planet-form').submit(function(event) {
 })
 
 
-DOMManager.getAllPlanets();
+DOMManager.getAllPlanets(); //ensuring that the database will be loaded when the page pulls up.
 
-//});

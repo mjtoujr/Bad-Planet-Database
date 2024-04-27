@@ -82,22 +82,24 @@ class DOMManager {
         $(`#${id}-edit-danger`).val(planet.danger);
     }
 
-    static updatePlanet(id, planet) {
-        //Specifically fetching the updated values
-        let name = planet.name;
+
+    static updatePlanet(id) {
+        // Fetching updated values from the DOM
         let description = $(`#${id}-edit-description`).val();
         let casualties = $(`#${id}-edit-casualties`).val();
         let danger = $(`#${id}-edit-danger`).val();
-
-        //Creating a new Planet using the updated values, without passing new name
-        let updatedPlanet = new Planet(name, description, casualties, danger);
-        //Call the updatePlanet function using the new object, ending with the render function to reload page
-        PlanetLogs.updatePlanet(id, updatedPlanet)
+    
+        // Creating an object with updated values
+        let updatedPlanet = { description, casualties, danger };
+    
+        // Call the updatePlanet function using the new object, ending with the render function to reload page
+        return PlanetLogs.updatePlanet(id, updatedPlanet)
             .then(() => {
                 return PlanetLogs.getAllPlanets();
             })
             .then((planets) => this.render(planets));
     }
+    
 
     //Actually loading in the data to the html
     static render(planets) {
@@ -121,11 +123,12 @@ class DOMManager {
                             <input type="text" id="${planet._id}-edit-description" class="form-control" placeholder="Planet Description">
                             <input type="number" id="${planet._id}-edit-casualties" class="form-control" placeholder="Total Casualties">
                             <input type="text" id="${planet._id}-edit-danger" class="form-control" placeholder="Dangerous Conditions">
-                            <button class='btn btn-success' onclick='DOMManager.updatePlanet("${planet._id}", ${JSON.stringify(planet)})'>Save Updates</button>
+                            <button class='btn btn-success' onclick='DOMManager.updatePlanet("${planet._id}")'>Save Updates</button>
+
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class='btn btn-warning' onclick='DOMManager.editPlanet("${planet._id}")'>Edit Planetary Record</button>
+                        <button class=' edit btn btn-warning' onclick='DOMManager.editPlanet("${planet._id}")'>Edit Planetary Record</button>
                         <button class='btn btn-danger' onclick='DOMManager.deletePlanet("${planet._id}")'>Remove Planetary Record</button>
                     </div>
                 </div>
